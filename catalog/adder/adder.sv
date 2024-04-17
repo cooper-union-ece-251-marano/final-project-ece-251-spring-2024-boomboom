@@ -17,14 +17,13 @@
 
 module adder
     #(parameter n = 32)(
-    //
-    // ---------------- PORT DEFINITIONS ----------------
-    //
-
+    input [n-1:0] a, b,
+    output reg [n-1:0] sum
 );
-    //
-    // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
-    //
+
+    always @* begin
+        sum = a + b;
+    end
 
 endmodule
 
