@@ -27,10 +27,10 @@ module tb_adder;
     end
 
     initial begin
-        a <= #10 {n{1'b1}};
-        b <= #10 {n{1'b1}};
-        #100; // Delay for simulation
-        $finish; // Finish simulation
+        a <= {n{32'b00000000000000000000000000000011}};
+        b <= {n{32'b00000000000000000000000000001111}};
+        #100;
+        $finish;
     end
 
     adder uut(
