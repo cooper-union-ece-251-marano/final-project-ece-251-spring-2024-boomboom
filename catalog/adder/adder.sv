@@ -17,12 +17,12 @@
 
 module adder
     #(parameter n = 32)(
-    input [n-1:0] a, b,
-    output reg [n-1:0] sum
-);
+        input [n-1:0] A, B,
+        output reg [n-1:0] SUM
+    );
 
     always @* begin
-        sum = a + b;
+        SUM = A + B;
     end
 
 endmodule
