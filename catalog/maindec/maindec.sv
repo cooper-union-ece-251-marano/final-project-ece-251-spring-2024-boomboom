@@ -25,40 +25,42 @@ module maindec
     output logic       branch, alusrc,
     output logic       regdst, regwrite,
     output logic       jump,
-    output logic [1:0] aluop
+    output logic [1:0] aluop,
+    output logic [3:0] funct
 );
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    logic [8:0] controls; // 9-bit control vector
+    logic [6:0] controls; // 7-bit control vector
 
     // controls has 9 logical signals
-    assign {regwrite, regdst, alusrc, branch, memwrite, memtoreg, jump, aluop} = controls;
+    assign {regwrite, regdst, alusrc, branch, memwrite, memtoreg, jump} = controls;
+    assign aluop = op[5:4];
+    assign funct = op[3:0];
     // regwrite 1, regdst 1 bit, alusrc 1 bit, branch 1 bit, memwrite 1 bit, memtoreg 1 bit, jump 1 bit, aluop 2 bit 
     
     always @* begin
         case(op)
-            6'b000000: controls <= 9'b000000000; // add
-			6'b000001: controls <= 9'b000000001; // sub
-			6'b000010: controls <= 9'b000000100; // and
-			6'b000011: controls <= 9'b000000101; // or
-			6'b000100: controls <= 9'b000000010; // sl
-			6'b000101: controls <= 9'b000000011; // sr
-			6'b000110: controls <= 9'b000000110; // xor
-			6'b000111: controls <= 9'b000000111; // nor
-			6'b001000: controls <= 9'b000001000; // nand
-			6'b001001: controls <= 9'b000001001; // not
-			6'b001010: controls <= 9'b000001010; // jr
-			6'b001011: controls <= 9'b000001011; // slt
-			6'b001100: controls <= 9'b000001100; // sgt
-			6'b001101: controls <= 9'b000001101; // addi 
-			6'b001110: controls <= 9'b000001110; // subi
-			6'b001111: controls <= 9'b000010000; // lw
-			6'b010000: controls <= 9'b000010001; // sw
-			6'b010001: controls <= 9'b000010010; // beq
-			6'b010010: controls <= 9'b000010011; // bne
-			6'b010011: controls <= 9'b000010100; // j
-			6'b010100: controls <= 9'b000010101; // jal
+            6'b000001: controls <= 7'b1100000; // add
+	    6'b000010: controls <= 7'b1100000; // sub
+	    6'b000011: controls <= 7'b1100000; // mul
+	    6'b000100: controls <= 7'b1100000; // div
+	    6'b000101: controls <= 7'b1100000; // or
+	    6'b000110: controls <= 7'b1100000; // and
+	    6'b000111: controls <= 7'b1100000; // nor
+	    6'b001000: controls <= 7'b1100000; // xor
+	    6'b001001: controls <= 7'b1100000; // sll
+	    6'b001010: controls <= 7'b1100000; // srl
+	    6'b001011: controls <= 7'b1100000; // slt
+
+	    6'b010000: controls <= 7'b0001000; // beq 
+	    6'b100000: controls <= 7'b1010010; // lw
+	    6'b100001: controls <= 7'b0010100; // sw
+	    6'b100010: controls <= 7'b1010000; // addi
+
+	    6'b110000: controls <= 7'b0000001; // j
+	    6'b110001: controls <= 7'b1000001; // jal
+	    6'b110011: controls <= 7'b0000001; // jr
         endcase
     end
 
