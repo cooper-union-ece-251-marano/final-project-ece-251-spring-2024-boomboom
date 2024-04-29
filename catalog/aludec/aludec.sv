@@ -22,7 +22,7 @@ module aludec
     //
 
     input logic [3:0] funct;
-    input logic [1:0] alup;
+    input logic [1:0] aluop;
     output logic [3:0] aluctrl;
 
 
