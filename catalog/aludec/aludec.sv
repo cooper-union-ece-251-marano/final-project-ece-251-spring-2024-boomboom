@@ -21,9 +21,29 @@ module aludec
     // ---------------- PORT DEFINITIONS ----------------
     //
 
+    input logic [3:0] funct;
+    input logic [1:0] alup;
+    output logic [3:0] aluctrl;
+
+
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
+    
+    always @* begin
+	    case(aluop)
+	    	2'b01: aluctrl <= 4'b0010; // sub for BEQ
+	    	2'b10: aluctrl <= 4'b0001; // add for LW,SW,ADDI
+	    	2'b11: aluctrl <= 4'bxxxx; // for when not in use
+		default: begin
+			case(funct)
+				aluctrl <= funct;
+				default:
+					aluctrl <= 4'bxxxx;
+			endcase
+	    	end
+	    endcase
+    end
 
 endmodule
 

@@ -20,8 +20,9 @@ module alu
     //
     // ---------------- PORT DEFINITIONS ----------------
     input logic [n-1:0] A,B,
-    input logic [2:0] S,
-    output logic [n-1:0] Y,
+    input logic [3:0] FUNCT,
+    output logic [n-1:0] Y, Hi, Lo,
+    output logic [n+n-1:0] Hilo
 
     //
 );
@@ -29,17 +30,23 @@ module alu
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
     
-    always @(A or B or S)
-	    case(S)
-		    3'b000: Y = A + B; //add
-		    3'b001: Y = A - B; //sub
-		    3'b010: Y = A|B; //or
-		    3'b011: Y = A&B; //and
-		    3'b100: Y = A<<B; //sll
-		    3'b101: Y = A>>B; //srl
-		    3'b110: Y = ~(A|B); //nor
-		    3'b111: Y = (A < B) ? 1:0; //slt
-
+    always @(A or B or FUNCT)
+	    case(FUNCT)
+		    4'b0001: Y = A + B; //add
+		    4'b0010: Y = A - B; //sub
+		    4'b0011: Hilo = A*B; //mult
+			     Hi = Hilo[n+n-1:n];
+			     Lo = Hilo[n-1:0];
+		    4'b0100: Lo = A/B; //div
+		    	     Hi = A%B;
+		    4'b0100: Y = A/B;
+		    4'b0101: Y = A|B; //or
+		    4'b0110: Y = A&B; //and
+		    4'b0111: Y = ~(A|B); //nor
+		    4'b1000: Y = A^B; //xor
+		    4'b1001: Y = A<<B; //sll
+		    4'b1010: Y = A>>B; //srl
+		    4'b1011: Y = (A < B) ? 1:0; //slt
 		endcase
 	end
 
