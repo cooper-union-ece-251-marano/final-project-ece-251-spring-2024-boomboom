@@ -22,7 +22,6 @@ module alu
     input logic [n-1:0] A,B,
     input logic [3:0] FUNCT,
     output logic [n-1:0] Y, Hi, Lo,
-    output logic [n+n-1:0] Hilo,
     output logic zero
 
     //
@@ -30,6 +29,10 @@ module alu
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
+
+    logic [n+n-1:0] Hilo;
+
+
     assign zero = (result == {n{1'b0}});
     always @(A or B or FUNCT) begin
 	    case(FUNCT)
