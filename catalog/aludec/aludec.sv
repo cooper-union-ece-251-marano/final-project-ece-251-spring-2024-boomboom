@@ -33,10 +33,10 @@ module aludec
 	    	2'b11: aluctrl <= 4'bxxxx; // for when not in use
             default: begin
                 if (funct > 0) begin
-                aluctrl <= funct;
-            end else begin
-                aluctrl <= 4'bxxxx;
-            end
+                	aluctrl <= funct;
+            	end else begin
+                	aluctrl <= 4'bxxxx;
+            	end
             end
         endcase
     end
