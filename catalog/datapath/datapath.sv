@@ -31,7 +31,7 @@ module datapath
     input  logic        clk, reset,
     input  logic        memtoreg, pcsrc,
     input  logic        alusrc, regdst,
-    input  logic        regwrite, jump, jrsrc,
+    input  logic        regwrite, jump, jrsrc, jalsrc,
     input  logic [3:0]  alucontrol,
     output logic        zero,
     output logic [(n-1):0] pc,
@@ -42,7 +42,8 @@ module datapath
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    logic [4:0]  writereg;
+
+    logic [6:0]  writereg, muxreg;
     logic [(n-1):0] pcnext, pcnextbr, pcnextbr2, pcplus4, pcbranch;
     logic [(n-1):0] signimm, signimmsh;
     logic [(n-1):0] srca, srcb;
@@ -60,7 +61,7 @@ module datapath
 
     // register file logic
     regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
-    mux2 #(7)   wrmux(instr[18:12], instr[11:5], regdst, writereg);
+    mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg);
     mux2 #(n)   resmux(aluout, readdata, memtoreg, result);
     signext     se(instr[11:0], signimm);
 
@@ -68,10 +69,11 @@ module datapath
     mux2 #(n)   srcbmux(writedata, signimm, alusrc, srcb);
     alu         alu(srca, srcb, alucontrol, aluout, zero);
 
-    // Jr and JAL logic
 
-    mux2to1 #(n) jrmux(pc4, srca, jrsrc, jrmux);
-    //jr
+
+    //jal
+    mux2 #(n) jalMux(result, pcplus4, jalsrc, jalout);
+    mux2 #(7) jalMux2(instr[18:12], 7'd127, jalsrc, muxreg);
 
 endmodule
 
