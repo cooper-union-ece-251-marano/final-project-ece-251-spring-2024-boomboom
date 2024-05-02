@@ -35,7 +35,7 @@ module aludec
                 if (funct > 0) begin
                 aluctrl <= funct;
             end else begin
-                aluctrl <= 4'b0000;
+                aluctrl <= 4'bxxxx;
             end
             end
         endcase
