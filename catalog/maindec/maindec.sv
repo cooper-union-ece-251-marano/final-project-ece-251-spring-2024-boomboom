@@ -62,6 +62,7 @@ module maindec
 	    6'b110000: controls <= 9'b000000100; // j
 	    6'b110001: controls <= 9'b100000101; // jal
 	    6'b110011: controls <= 9'b000000110; // jr
+	    default:   controls <= 9'bxxxxxxxxx;
         endcase
     end
 
