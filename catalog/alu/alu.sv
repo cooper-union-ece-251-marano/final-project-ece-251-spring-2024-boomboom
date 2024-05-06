@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: YOUR NAMES
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2023-02-07
+//     Create Date: 2024-05-02
 //     Module Name: alu
 //     Description: 32-bit RISC-based CPU alu (MIPS)
 //
@@ -20,7 +20,7 @@ module alu
         input logic [n-1:0] A, B,
         input logic [3:0] FUNCT,
         output logic [n-1:0] Y, Hi, Lo,
-        output logic zero
+        output logic zero  // Hypothetical additional output
     );
     logic [n+n-1:0] Hilo;
 

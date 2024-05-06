@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: Prof Rob Marano
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2023-02-07
+//     Create Date: 2024-05-02
 //     Module Name: regfile
 //     Description: 32-bit RISC register file
 //
@@ -16,8 +16,8 @@
 `timescale 1ns/100ps
 
 module regfile
-    // n=bit length of register; r=bit length of addr of registers
-    #(parameter n = 32, parameter r = 5)(
+
+    #(parameter n = 32, parameter r = 7)(
     //
     // ---------------- PORT DEFINITIONS ----------------
     //

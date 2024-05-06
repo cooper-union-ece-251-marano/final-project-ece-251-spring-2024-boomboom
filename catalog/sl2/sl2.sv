@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: Prof Rob Marano
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2023-02-07
+//     Create Date: 2024-05-02
 //     Module Name: sl2
 //     Description: shift left by 2 (multiply by 4)
 //

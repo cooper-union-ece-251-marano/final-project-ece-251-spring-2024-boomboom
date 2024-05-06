@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: Prof Rob Marano
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2023-02-07
+//     Create Date: 2024-05-02
 //     Module Name: tb_dmem
 //     Description: Test bench for data memory
 //
@@ -19,7 +19,7 @@
 
 module tb_dmem;
     parameter n = 32; // bit length of registers/memory
-    parameter r = 6; // we are only addressing 64=2**6 mem slots in imem
+    parameter r = 7; // we are only addressing 64=2**6 mem slots in imem
     logic [(n-1):0] readdata, writedata;
     logic [(n-1):0] dmem_addr;
     logic write_enable;

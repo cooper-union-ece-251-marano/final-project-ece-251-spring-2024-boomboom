@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: Prof Rob Marano
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2023-02-07
+//     Create Date: 2024-05-02
 //     Module Name: dmem
 //     Description: 32-bit RISC memory ("data" segment)
 //
@@ -12,6 +12,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 `ifndef DMEM
 `define DMEM
+
+`include "../aludec/aludec.sv"
+`include "../maindec/maindec.sv"
 
 `timescale 1ns/100ps
 

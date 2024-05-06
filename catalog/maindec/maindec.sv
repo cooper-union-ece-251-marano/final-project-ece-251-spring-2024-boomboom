@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 261 Spring 2024
-// Engineer: Jonghyeok Kim, Anthony Kwon
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2024-04-28
+//     Create Date: 2024-05-02
 //     Module Name: maindec
 //     Description: 32-bit RISC-based CPU main decoder (MIPS)
 //
@@ -20,7 +20,7 @@ module maindec
     //
     // ---------------- PORT DEFINITIONS ----------------
     //
-    input  logic [6:0] op,
+    input  logic [5:0] op,
     output logic       memtoreg, memwrite,
     output logic       branch, alusrc,
     output logic       regdst, regwrite,
@@ -43,26 +43,26 @@ module maindec
     always @* begin
         case(op)
             6'b000001: controls <= 9'b110000000; // add
-	    6'b000010: controls <= 9'b110000000; // sub
-	    6'b000011: controls <= 9'b110000000; // mul
-	    6'b000100: controls <= 9'b110000000; // div
-	    6'b000101: controls <= 9'b110000000; // or
-	    6'b000110: controls <= 9'b110000000; // and
-	    6'b000111: controls <= 9'b110000000; // nor
-	    6'b001000: controls <= 9'b110000000; // xor
-	    6'b001001: controls <= 9'b110000000; // sll
-	    6'b001010: controls <= 9'b110000000; // srl
-	    6'b001011: controls <= 9'b110000000; // slt
+            6'b000010: controls <= 9'b110000000; // sub
+            6'b000011: controls <= 9'b110000000; // mul
+            6'b000100: controls <= 9'b110000000; // div
+            6'b000101: controls <= 9'b110000000; // or
+            6'b000110: controls <= 9'b110000000; // and
+            6'b000111: controls <= 9'b110000000; // nor
+            6'b001000: controls <= 9'b110000000; // xor
+            6'b001001: controls <= 9'b110000000; // sll
+            6'b001010: controls <= 9'b110000000; // srl
+            6'b001011: controls <= 9'b110000000; // slt
 
-	    6'b010000: controls <= 9'b000100000; // beq 
-	    6'b100000: controls <= 9'b101001000; // lw
-	    6'b100001: controls <= 9'b001010000; // sw
-	    6'b100010: controls <= 9'b101000000; // addi
+            6'b010000: controls <= 9'b000100000; // beq 
+            6'b100000: controls <= 9'b101001000; // lw
+            6'b100001: controls <= 9'b001010000; // sw
+            6'b100010: controls <= 9'b101000000; // addi
 
-	    6'b110000: controls <= 9'b000000100; // j
-	    6'b110001: controls <= 9'b100000101; // jal
-	    6'b110011: controls <= 9'b000000110; // jr
-	    default:   controls <= 9'bxxxxxxxxx;
+            6'b110000: controls <= 9'b000000100; // j
+            6'b110001: controls <= 9'b100000101; // jal
+            6'b110011: controls <= 9'b000000110; // jr
+            default:   controls <= 9'bxxxxxxxxx; 
         endcase
     end
 

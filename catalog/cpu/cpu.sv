@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: Prof Rob Marano
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2023-02-07
+//     Create Date: 2024-05-03
 //     Module Name: cpu
 //     Description: 32-bit RISC-based CPU (MIPS)
 //
@@ -27,15 +27,16 @@ module cpu
     output logic [(n-1):0] pc,
     input  logic [(n-1):0] instr,
     output logic           memwrite,
-    output logic [(n-1):0] aluout, writedata,
-    input  logic [(n-1):0] readdata
+    output logic [(n-1):0] aluout, writedata, jalout, // jalout added
+    input  logic [(n-1):0] readdata, 
+    output logic [(n-1):0] hi, lo // hi and lo added
 );
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
 
     // cpu internal components
-    logic       memtoreg, alusrc, regdst, regwrite, jump, jrsrc, jalsrc pcsrc, zero;
+    logic       memtoreg, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, pcsrc, zero;
     logic [3:0] alucontrol;
     
     controller c(instr[(31):26], zero,
@@ -46,8 +47,8 @@ module cpu
     datapath dp(clk, reset, memtoreg, pcsrc,
                     alusrc, regdst, regwrite, jump, jrsrc, jalsrc,
                     alucontrol,
-                    zero, pc, instr,
-                    aluout, writedata, readdata);
+                    zero, pc, jalout, instr, // jalout added
+                    aluout, writedata, hi, lo, readdata); // hi and lo added
 
 endmodule
 

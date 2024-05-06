@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: Prof Rob Marano
+// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
-//     Create Date: 2023-02-07
+//     Create Date: 2024-05-02
 //     Module Name: signext
 //     Description: 16 to 32 bit sign extender
 //
@@ -16,7 +16,7 @@
 `timescale 1ns/100ps
 
 module signext
-    #(parameter n = 32, i = 16)(
+    #(parameter n = 32, i = 12)(
     //
     // ---------------- PORT DEFINITIONS ----------------
     //
