@@ -1,0 +1,14 @@
+# Fibonacci function using MIPS assembly with given opcodes
+
+# Register Usage:
+# $s0: i (loop counter)
+# $s1: fib(n-1)
+# $s2: fib(n-2)
+# $s3: current Fibonacci number
+# $ra: return address
+
+# Fibonacci function (recursive)
+fibonacci:
+    # Check if n <= 1
+    10001001000000000010000000000110 # ADDI $s0, $s1, 6         # Load 1 into $t0
+    00000000000000000000000000001000 # jr $ra                   # Return to caller
