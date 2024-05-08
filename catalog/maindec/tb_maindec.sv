@@ -4,19 +4,19 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_maindec
+//     Module Name: tbmaindec
 //     Description: Test bench for simple behavorial main decoder
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_MAINDEC
-`define TB_MAINDEC
+`ifndef TBMAINDEC
+`define TBMAINDEC
 
 `timescale 1ns/100ps
 `include "maindec.sv"
 
-module tb_maindec;
+module tbmaindec;
     reg [5:0] op;
     wire memtoreg, memwrite, branch, alusrc, regdst, regwrite, jump;
     wire [1:0] aluop;
@@ -34,8 +34,8 @@ module tb_maindec;
     );
 
     initial begin
-        $dumpfile("tb_maindec.vcd");
-        $dumpvars(0, tb_maindec);
+        $dumpfile("tbmaindec.vcd");
+        $dumpvars(0, tbmaindec);
 
         op = 6'b000000;
         #10;
@@ -54,4 +54,4 @@ module tb_maindec;
     end
 
 endmodule
-`endif // TB_MAINDEC
+`endif // TBMAINDEC

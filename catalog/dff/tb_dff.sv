@@ -4,20 +4,20 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_dff
+//     Module Name: tbdff
 //     Description: Test bench for 32 bit D flip flop
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_DFF
-`define TB_DFF
+`ifndef TBDFF
+`define TBDFF
 
 `timescale 1ns/100ps
 `include "dff.sv"
 `include "../clock/clock.sv"
 
-module tb_dff;
+module tbdff;
     parameter n = 32; // #bits for an operand
     wire clk;
     logic enable;
@@ -28,7 +28,7 @@ module tb_dff;
    initial begin
         $dumpfile("dff.vcd");
         $dumpvars(0, uut0, uut1);
-        //$monitor("d = %b (0x%0h)(%0d) q = %b (0x%0h)(%0d) ", d,d,d,q,q,q);
+        //$monitor("d = %b (%0h)(%0d) q = %b (%0h)(%0d) ", d,d,d,q,q,q);
         $monitor("time=%0t \t d=%h q=%h",$realtime, d, q);
     end
 
@@ -54,4 +54,4 @@ module tb_dff;
         .CLOCK(clk)
     );
 endmodule
-`endif // TB_DFF
+`endif // TBDFF

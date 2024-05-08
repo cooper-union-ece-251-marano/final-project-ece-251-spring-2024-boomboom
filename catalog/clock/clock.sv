@@ -26,30 +26,30 @@ module clock
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    reg start_clock;
-    real clock_on = ticks/2; // duty cycle = 50%
-    real clock_off = ticks/2;
+    reg startclock;
+    real clockon = ticks/2; // duty cycle = 50%
+    real clockoff = ticks/2;
 
     // initialize variables
     initial begin
       CLOCK <= 0;
-      start_clock <= 0;
+      startclock <= 0;
     end
 
     always @(posedge ENABLE or negedge ENABLE) begin
         if (ENABLE) begin
-            start_clock = 1;
+            startclock = 1;
         end
         else begin
-            start_clock = 0;
+            startclock = 0;
         end
         // #ticks CLOCK = ~CLOCK;
     end
-    always @(start_clock) begin
+    always @(startclock) begin
         CLOCK = 0;
-        while (start_clock) begin
-            #(clock_off) CLOCK = 1;
-            #(clock_on) CLOCK = 0;
+        while (startclock) begin
+            #(clockoff) CLOCK = 1;
+            #(clockon) CLOCK = 0;
         end
         CLOCK = 0;
     end

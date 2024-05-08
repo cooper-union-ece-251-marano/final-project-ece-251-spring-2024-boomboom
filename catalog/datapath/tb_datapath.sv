@@ -4,26 +4,28 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_datapath
+//     Module Name: tbdatapath
 //     Description: Test bench for the 32-bit RISC-based CPU datapath (MIPS)
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_DATAPATH
-`define TB_DATAPATH
+`ifndef TBDATAPATH
+`define TBDATAPATH
 
 `timescale 1ns/100ps
 `include "datapath.sv"
 
-module tb_datapath;
+module tbdatapath;
     parameter n = 32;
     reg clk, reset;
     reg memtoreg, pcsrc, alusrc, regdst, regwrite, jump, jrsrc, jalsrc;
     reg [3:0] alucontrol;
     reg [(n-1):0] instr, readdata;
     wire zero;
-    wire [(n-1):0] pc, aluout, writedata, hi, lo, jalout;
+    wire [(n-1):0] pc, aluout, writedata; 
+    wire hi, lo; 
+    wire [(n-1):0] jalout;
 
     datapath #(.n(n)) DUT (
         .clk(clk),
@@ -56,8 +58,8 @@ module tb_datapath;
     end
 
     initial begin
-        $dumpfile("datapath_tb.vcd");
-        $dumpvars(0, tb_datapath);
+        $dumpfile("datapathtb.vcd");
+        $dumpvars(0, tbdatapath);
         reset = 1'b1;
         memtoreg = 0; pcsrc = 0; alusrc = 0; regdst = 0; regwrite = 0; jump = 0; jrsrc = 0; jalsrc = 0;
         alucontrol = 4'b0000;
@@ -78,4 +80,4 @@ module tb_datapath;
     end
 
 endmodule
-`endif // TB_DATAPATH
+`endif // TBDATAPATH

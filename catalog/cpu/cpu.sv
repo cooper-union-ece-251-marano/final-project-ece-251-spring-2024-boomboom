@@ -29,7 +29,7 @@ module cpu
     output logic           memwrite,
     output logic [(n-1):0] aluout, writedata, jalout, // jalout added
     input  logic [(n-1):0] readdata, 
-    output logic [(n-1):0] hi, lo // hi and lo added
+    output logic hi, lo // hi and lo added
 );
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------

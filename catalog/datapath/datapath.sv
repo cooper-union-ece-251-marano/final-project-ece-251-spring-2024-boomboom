@@ -36,7 +36,8 @@ module datapath
     output logic        zero,
     output logic [(n-1):0] pc, jalout, // jalout defined
     input  logic [(n-1):0] instr,
-    output logic [(n-1):0] aluout, writedata, hi, lo, // hi and lo added
+    output logic [(n-1):0] aluout, writedata, 
+    output logic hi, lo, // hi and lo added
     input  logic [(n-1):0] readdata
 );
     //
@@ -61,7 +62,7 @@ module datapath
 
     // register file logic
     // From regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
-    regfile     rf(clk, regwrite, instr[24:18], instr[17:11], writereg, result, srca, writedata);
+    regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
     mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg); // instr[11:5] fixed
     mux2 #(n)   resmux(aluout, readdata, memtoreg, result);
     signext     se(instr[11:0], signimm);

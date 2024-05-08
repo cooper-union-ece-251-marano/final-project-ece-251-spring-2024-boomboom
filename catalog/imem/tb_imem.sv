@@ -4,42 +4,34 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_imem
+//     Module Name: tbimem
 //     Description: Test bench for instruction memory
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_IMEM
-`define TB_IMEM
+`ifndef IMEM
+`define IMEM
 
 `timescale 1ns/100ps
-`include "imem.sv"
 
-module tb_imem;
-    parameter n = 32; // bit length of registers/memory
-    parameter r = 7; // we are only addressing 64=2**6 mem slots in imem
-    logic [(n-1):0] readdata;
-    logic [(r-1):0] imem_addr;
+module imem
+    #(parameter n = 32, parameter r = 7)(
+    input logic [(r-1):0] addr,
+    output logic [(n-1):0] readdata
+);
 
-   initial begin
-        $dumpfile("imem.vcd");
-        $dumpvars(0, uut);
-        //$monitor("enable = %b clk = %b", enable, clk);
-        $monitor("time=%0t \t imem_addr=%b readdata=%h",$realtime, imem_addr, readdata);
-    end
+    logic [(n-1):0] RAM[(1<<r)-1:0];  // Ensure array bounds are correctly defined
 
     initial begin
-        #10 imem_addr <= #(r)'b000000;
-        #10 imem_addr <= #(r)'b000001;
-        #10 imem_addr <= #(r)'b000010;
-        $finish;
+        integer i;
+        for (i = 0; i < (1<<r); i = i + 1) {
+            RAM[i] = 32'h00000000;  // Initialize all memory to NOP (or zero)
+        }
+        $readmemh("imem_check.dat", RAM);  // Load the actual program
     end
 
-   imem uut(
-        .addr(imem_addr),
-        .readdata(readdata)
-    );
+    assign readdata = RAM[addr];  // Word aligned access
 endmodule
 
-`endif // TB_IMEM
+`endif // IMEM

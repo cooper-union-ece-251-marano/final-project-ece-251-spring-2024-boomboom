@@ -12,7 +12,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 `timescale 1ns / 100ps
 
-module tb_aludec;
+module tbaludec;
     // Testbench uses same parameter size as the aludec module
     parameter n = 32;
     reg [3:0] funct;

@@ -1,5 +1,5 @@
 # mipstest.asm
-# David_Harris@hmc.edu, Sarah_Harris@hmc.edu 31 March 2012
+# DavidHarris@hmc.edu, SarahHarris@hmc.edu 31 March 2012
 #
 # Test the MIPS processor.
 # add, sub, and, or, slt, addi, lw, sw, beq, j

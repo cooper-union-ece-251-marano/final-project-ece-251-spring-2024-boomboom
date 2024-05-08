@@ -4,26 +4,26 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_sl2
+//     Module Name: tbsl2
 //     Description: Test bench for shift left by 2 (multiply by 4)
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_SL2
-`define TB_SL2
+`ifndef TBSL2
+`define TBSL2
 
 `timescale 1ns/100ps
 `include "sl2.sv"
 
-module tb_sl2;
+module tbsl2;
     parameter n = 32;
     logic [(n-1):0] a, y;
 
    initial begin
         $dumpfile("sl2.vcd");
         $dumpvars(0, uut);
-        //$monitor("a = %0b (0x%0h)(%0d) y = %0b (0x%0h)(%0d) ", a, a, a, y, y, y);
+        //$monitor("a = %0b (%0h)(%0d) y = %0b (%0h)(%0d) ", a, a, a, y, y, y);
         $monitor("time=%0t \t a=%b y=%b",$realtime, a, y);
     end
 
@@ -35,4 +35,4 @@ module tb_sl2;
         .A(a), .Y(y)
     );
 endmodule
-`endif // TB_SL2
+`endif // TBSL2

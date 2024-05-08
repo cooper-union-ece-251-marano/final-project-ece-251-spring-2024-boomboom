@@ -4,25 +4,26 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_alu
+//     Module Name: tbalu
 //     Description: Test bench for simple behavorial ALU
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_ALU
-`define TB_ALU
+`ifndef TBALU
+`define TBALU
 
 `timescale 1ns/100ps
 `include "alu.sv"
 
-module tb_alu;
+module tbalu;
     parameter n = 32;
 
     // Declare inputs as regs and outputs as wires
     reg [n-1:0] A, B;
     reg [3:0] FUNCT;
-    wire [n-1:0] Y, Hi, Lo;
+    wire [n-1:0] Y; 
+    wire Hi, Lo;
     wire zero;
 
     // Instantiate the Device Under Test (DUT)
@@ -92,4 +93,4 @@ module tb_alu;
     end
 
 endmodule
-`endif // TB_ALU
+`endif // TBALU

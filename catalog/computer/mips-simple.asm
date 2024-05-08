@@ -1,7 +1,7 @@
 #
 # This program is machine encoded in program.dat
 #
-.org 0                      # Memory begins at location 0x00000000
+.org 0                      # Memory begins at location 00000000
 Main:                                                      # MIPS machine code
     addi $v0, $zero, 10     # $v0 = 10                     ; 2002000a
     addi $v1, $zero, 15     # $v1 = 15                     ; 2003000f

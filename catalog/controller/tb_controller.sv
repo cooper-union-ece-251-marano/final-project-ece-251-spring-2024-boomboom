@@ -4,19 +4,19 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_controller
+//     Module Name: tbcontroller
 //     Description: Test bench for controller
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_CONTROLLER
-`define TB_CONTROLLER
+`ifndef TBCONTROLLER
+`define TBCONTROLLER
 
 `timescale 1ns/100ps
 `include "controller.sv"
 
-module tb_controller;
+module tbcontroller;
     // Parameters
     parameter n = 32;
 
@@ -44,8 +44,8 @@ module tb_controller;
 
     // Test stimulus
     initial begin
-        $dumpfile("controller_tb.vcd");
-        $dumpvars(0, tb_controller);
+        $dumpfile("controllertb.vcd");
+        $dumpvars(0, tbcontroller);
 
         // Initialize inputs
         op = 6'b000000; zero = 1'b0;
@@ -68,4 +68,4 @@ module tb_controller;
         #10 $finish;
     end
 endmodule
-`endif // TB_CONTROLLER
+`endif // TBCONTROLLER

@@ -4,19 +4,19 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_clock
+//     Module Name: tbclock
 //     Description: Test bench for clock generator
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_CLOCK
-`define TB_CLOCK
+`ifndef TBCLOCK
+`define TBCLOCK
 
 `timescale 1ns/100ps
 `include "clock.sv"
 
-module tb_clock;
+module tbclock;
     wire clk;
     logic enable;
 
@@ -40,4 +40,4 @@ module tb_clock;
     );
 endmodule
 
-`endif // TB_CLOCK
+`endif // TBCLOCK

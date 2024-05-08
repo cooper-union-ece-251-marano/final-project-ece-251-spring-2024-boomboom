@@ -24,7 +24,7 @@ module dmem
     //
     // ---------------- PORT DEFINITIONS ----------------
     //
-    input  logic           clk, write_enable,
+    input  logic           clk, writeenable,
     input  logic [(n-1):0] addr, writedata,
     output logic [(n-1):0] readdata
 );
@@ -36,7 +36,7 @@ module dmem
     assign readdata = RAM[addr[(n-1):2]]; // word aligned (ignores lower 2 bits of address)
 
     always @(posedge clk) // write on posedge
-        if (write_enable) RAM[addr[(n-1):2]] <= writedata;
+        if (writeenable) RAM[addr[(n-1):2]] <= writedata;
 
 endmodule
 

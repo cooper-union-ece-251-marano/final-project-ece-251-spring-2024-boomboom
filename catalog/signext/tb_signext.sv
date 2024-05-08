@@ -4,19 +4,19 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_signext
+//     Module Name: tbsignext
 //     Description: Test bench for sign extender
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_SIGNEXT
-`define TB_SIGNEXT
+`ifndef TBSIGNEXT
+`define TBSIGNEXT
 
 `timescale 1ns/100ps
 `include "signext.sv"
 
-module tb_sl2;
+module tbsl2;
     parameter n = 32; // #bits for an operand
     parameter i = n/2; // #bits for an immediate
     logic [(i-1):0] a;
@@ -25,7 +25,7 @@ module tb_sl2;
    initial begin
         $dumpfile("signext.vcd");
         $dumpvars(0, uut);
-        //$monitor("a = %b (0x%0h)(%0d) y = %b (0x%0h)(%0d) ", a, a, a, y, y, y);
+        //$monitor("a = %b (%0h)(%0d) y = %b (%0h)(%0d) ", a, a, a, y, y, y);
         $monitor("time=%0t \t a=%b y=%b",$realtime, a, y);
     end
 
@@ -37,4 +37,4 @@ module tb_sl2;
         .A(a), .Y(y)
     );
 endmodule
-`endif // TB_SIGNEXT
+`endif // TBSIGNEXT

@@ -14,30 +14,21 @@
 `define IMEM
 
 `timescale 1ns/100ps
-
 module imem
-// n=bit length of register; r=bit length of addr to limit memory and not crash your verilog emulator
-    #(parameter n = 32, parameter r = 7)(
-    //
-    // ---------------- PORT DEFINITIONS ----------------
-    //
-    input  logic [(r-1):0] addr,
-    output logic [(n-1):0] readdata
-);
-    //
-    // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
-    //
-    logic [(n-1):0] RAM[0:(2**r-1)];
+    #(parameter n = 32, parameter r = 7)
+    (
+        input logic [(r-1):0] addr,
+        output logic [(n-1):0] readdata
+    );
 
-  initial
-    begin
-      // read memory in hex format from file 
-      // $readmemh("program_exe",RAM);
-      $readmemh("mult-prog_exe",RAM);
+    logic [31:0] RAM[0:127];
+    
+    initial begin
+        $readmemh("../imem_check.dat", RAM);
     end
+    
 
-  assign readdata = RAM[addr]; // word aligned
+    assign readdata = RAM[addr]; 
 
 endmodule
-
 `endif // IMEM

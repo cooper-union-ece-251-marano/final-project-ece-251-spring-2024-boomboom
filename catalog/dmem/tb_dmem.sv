@@ -4,62 +4,62 @@
 // Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
-//     Module Name: tb_dmem
+//     Module Name: tbdmem
 //     Description: Test bench for data memory
 //
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-`ifndef TB_DMEM
-`define TB_DMEM
+`ifndef TBDMEM
+`define TBDMEM
 
 `timescale 1ns/100ps
 `include "dmem.sv"
 `include "../clock/clock.sv"
 
-module tb_dmem;
+module tbdmem;
     parameter n = 32; // bit length of registers/memory
     parameter r = 7; // we are only addressing 64=2**6 mem slots in imem
     logic [(n-1):0] readdata, writedata;
-    logic [(n-1):0] dmem_addr;
-    logic write_enable;
-    logic clk, clock_enable;
+    logic [(n-1):0] dmemaddr;
+    logic writeenable;
+    logic clk, clockenable;
 
    initial begin
         $dumpfile("dmem.vcd");
         $dumpvars(0, uut, uut1);
-        $monitor("time=%0t write_enable=%b dmem_addr=%h readdata=%h writedata=%h",
-            $realtime, write_enable, dmem_addr, readdata, writedata);
+        $monitor("time=%0t writeenable=%b dmemaddr=%h readdata=%h writedata=%h",
+            $realtime, writeenable, dmemaddr, readdata, writedata);
     end
 
     initial begin
-        #10 clock_enable <= 1;
+        #10 clockenable <= 1;
         #20 writedata = #(n)'hFFFFFFFF;
-        #20 dmem_addr <= #(r)'b000000;
-        #20 write_enable <= 1;
-        #20 write_enable <= 0;
-        #20 dmem_addr <= #(r)'b000001;
+        #20 dmemaddr <= #(r)'b000000;
+        #20 writeenable <= 1;
+        #20 writeenable <= 0;
+        #20 dmemaddr <= #(r)'b000001;
         #20 writedata = #(n)'h0000FFFF;
-        #20 write_enable <= 1;
-        #20 write_enable <= 0;
-        #20 dmem_addr <= #(r)'b000010;
+        #20 writeenable <= 1;
+        #20 writeenable <= 0;
+        #20 dmemaddr <= #(r)'b000010;
         #20 writedata = #(n)'h00000000;
-        #20 write_enable <= 1;
-        #20 write_enable <= 0;
+        #20 writeenable <= 1;
+        #20 writeenable <= 0;
         #20 $finish;
     end
 
    dmem uut(
         .clk(clk),
-        .write_enable(write_enable),
-        .addr(dmem_addr),
+        .writeenable(writeenable),
+        .addr(dmemaddr),
         .writedata(writedata),
         .readdata(readdata)
     );
     clock uut1(
-        .ENABLE(clock_enable),
+        .ENABLE(clockenable),
         .CLOCK(clk)
     );
 endmodule
 
-`endif // TB_IMEM
+`endif // TBIMEM
