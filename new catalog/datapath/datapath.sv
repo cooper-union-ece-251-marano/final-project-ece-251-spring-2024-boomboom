@@ -42,12 +42,12 @@ module datapath
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    logic [6:0]  writereg, muxreg;
-    logic [(n-1):0] pcnext, pcnextbr, pcnextbr2, pcplus4, pcbranch;
-    logic [(n-1):0] signimm, signimmsh;
-    logic [(n-1):0] srca, srcb;
-    logic [(n-1):0] result; // Q. 이 Y는 뭘까요?
-    logic jrsrc, jalsrc, hi, lo;
+    wire [6:0]  writereg, muxreg;
+    wire [(n-1):0] pcnext, pcnextbr, pcnextbr2, pcplus4, pcbranch;
+    wire [(n-1):0] signimm, signimmsh;
+    wire [(n-1):0] srca, srcb;
+    wire [(n-1):0] result;
+    wire jrsrc, jalsrc, hi, lo;
 
     // "next PC" logic
     dff #(n)    pcreg(clk, reset, pcnext, pc);
