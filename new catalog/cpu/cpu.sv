@@ -27,7 +27,7 @@ module cpu
     output logic [(n-1):0] pc,
     input  logic [(n-1):0] instr,
     output logic           memwrite,
-    output logic [(n-1):0] aluout, writedata, // jalout added
+    output logic [(n-1):0] aluout, writedata,
     input  logic [(n-1):0] readdata
 );
     //
@@ -35,9 +35,9 @@ module cpu
     //
 
     // cpu internal components
-    logic       memtoreg, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, pcsrc, zero, hi, lo;
-    logic [3:0] alucontrol;
-    logic [31:0] jalout; // Q.위에 output에 넣는게 나을까요? wire 로 하는게 나을까요? 아니면 이대로?
+    wire       memtoreg, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, pcsrc, zero, hi, lo;
+    wire [3:0] alucontrol;
+    wire [31:0] jalout; // Q.위에 output에 넣는게 나을까요? wire 로 하는게 나을까요? 아니면 이대로?
     
     controller c(instr[(31):26], zero,
                     memtoreg, memwrite, pcsrc,
