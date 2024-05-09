@@ -5,7 +5,7 @@
 // 
 //     Create Date: 2024-05-03
 //     Module Name: cpu
-//     Description: 32-bit RISC-based CPU (MIPS)
+//     Description: 32-bit RISC-based CPU (cpu)
 //
 // Revision: 1.0
 //
@@ -27,28 +27,28 @@ module cpu
     output logic [(n-1):0] pc,
     input  logic [(n-1):0] instr,
     output logic           memwrite,
-    output logic [(n-1):0] aluout, writedata, jalout, // jalout added
-    input  logic [(n-1):0] readdata, 
-    output logic hi, lo // hi and lo added
+    output logic [(n-1):0] aluout, writedata, // jalout added
+    input  logic [(n-1):0] readdata
 );
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
 
     // cpu internal components
-    logic       memtoreg, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, pcsrc, zero;
+    logic       memtoreg, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, pcsrc, zero, hi, lo;
     logic [3:0] alucontrol;
+    logic [31:0] jalout; // Q.위에 output에 넣는게 나을까요? wire 로 하는게 나을까요? 아니면 이대로?
     
     controller c(instr[(31):26], zero,
                     memtoreg, memwrite, pcsrc,
-                    alusrc, regdst, regwrite, jump, jrsrc, jalsrc,
+                    alusrc, regdst, regwrite, jump,
                     alucontrol);
 
     datapath dp(clk, reset, memtoreg, pcsrc,
-                    alusrc, regdst, regwrite, jump, jrsrc, jalsrc,
+                    alusrc, regdst, regwrite, jump,
                     alucontrol,
-                    zero, pc, jalout, instr, // jalout added
-                    aluout, writedata, hi, lo, readdata); // hi and lo added
+                    zero, pc, jalout, instr,
+                    aluout, writedata, readdata); // hi and lo deleted
 
 endmodule
 
