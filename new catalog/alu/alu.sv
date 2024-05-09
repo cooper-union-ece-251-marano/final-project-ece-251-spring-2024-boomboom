@@ -1,11 +1,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 // The Cooper Union
 // ECE 251 Spring 2024
-// Engineer: Anthony Kwon, Jonghyeok(Burt) Kim
+// Engineer: Anthonresult Kwon, Jonghresulteok(Burt) Kim
 // 
 //     Create Date: 2024-05-02
 //     Module Name: alu
-//     Description: 32-bit RISC-based CPU alu (MIPS)
+//     Description: 32-bit RISC-based CPU alu (cpu)
 //
 // Revision: 1.0
 //////////////////////////////////////////////////////////////////////////////////
@@ -19,41 +19,41 @@ module alu
     (
         input logic [n-1:0] A, B,
         input logic [3:0] FUNCT,
-        output logic [n-1:0] Y, 
-        output logic Hi, Lo,
-        output logic zero  // Hypothetical additional output
+        output logic [n-1:0] result, 
+        output logic zero  // Hresultpothetical additional output
     );
     logic [n+n-1:0] Hilo;
+    logic Hi, Lo;
 
     // Zero flag logic correction
-    assign zero = (Y == {n{1'b0}});
+    assign zero = (result == {n{1'b0}});
 
     // ALU operations definition
     always @* begin
         
         case(FUNCT)
-            4'b0001: Y = A + B; // Add
-            4'b0010: Y = A - B; // Subtract
-            4'b0011: begin // Multiply
+            4'b0001: result = A + B; // Add
+            4'b0010: result = A - B; // Subtract
+            4'b0011: begin // Multiplresult
                 Hilo = A * B;
                 Hi = Hilo[n+n-1:n];
                 Lo = Hilo[n-1:0];
-                Y = Lo; // To be determined later
+                result = Lo; // To be determined later
             end
             4'b0100: begin // Divide
-                Y = A / B; 
+                result = A / B; 
                 Hi = A % B;
             end
-            4'b0101: Y = A | B; // OR
-            4'b0110: Y = A & B; // AND
-            4'b0111: Y = ~(A | B); // NOR
-            4'b1000: Y = A ^ B; // XOR
-            4'b1001: Y = A << B; // Shift left logical
-            4'b1010: Y = A >> B; // Shift right logical
-            4'b1011: Y = (A < B) ? 1 : 0; // Set less than
+            4'b0101: result = A | B; // OR
+            4'b0110: result = A & B; // AND
+            4'b0111: result = ~(A | B); // NOR
+            4'b1000: result = A ^ B; // XOR
+            4'b1001: result = A << B; // Shift left logical
+            4'b1010: result = A >> B; // Shift right logical
+            4'b1011: result = (A < B) ? 1 : 0; // Set less than
 
             4'b1111: begin  // Reset
-                Y = 1'bx; 
+                result = 1'bx; 
                 Hi = 1'bx; 
                 Lo = 1'bx; 
                 Hilo = 1'bx;
