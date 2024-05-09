@@ -34,9 +34,9 @@ module controller
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    logic [1:0] aluop;
+    wire [1:0] aluop;
     logic [3:0] funct;
-    logic       branch, jrsrc, jalsrc;
+    wire       branch, jrsrc, jalsrc;
     
     // CPU main decoder
     maindec md(op, memtoreg, memwrite, branch, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, aluop, funct);
