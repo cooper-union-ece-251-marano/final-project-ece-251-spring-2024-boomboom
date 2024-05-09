@@ -15,8 +15,8 @@
 COMPONENT = computer
 #SRC = $(shell ls *.sv)
 SRC = $(wildcard *.sv)
-SIM_ARGS=+a=3 +b=2 +s=0
-TBOUTPUT = $(COMPONENT).vcd	# THIS NEEDS TO MATCH THE OUTPUT FILE
+SIMARGS=+a=3 +b=2 +s=0
+TBOUTPUT = tb_$(COMPONENT).vcd	# THIS NEEDS TO MATCH THE OUTPUT FILE
 									# FROM YOUR TESTBENCH
 ###############################################################################
 # BE CAREFUL WHEN CHANGING ITEMS BELOW THIS LINE
@@ -39,9 +39,9 @@ compile : $(SRC)
 
 simulate: $(COMPONENT).vvp
 	$(SIMULATOR) $(SFLAGS) $(COMPONENT).vvp $(SOUTPUT)
-
+#	$(SIMULATOR) $(SFLAGS) $(COMPONENT).vvp $(SOUTPUT) -$(TBOUTPUT).vcd
 display: $(TBOUTPUT)
-	$(VIEWER) $(TBOUTPUT) &
+	$(VIEWER) $(TBOUTPUT).vcd &
 
 clean:
 	/bin/rm -f $(COMPONENT).vvp *.vcd a.out compiler.out
