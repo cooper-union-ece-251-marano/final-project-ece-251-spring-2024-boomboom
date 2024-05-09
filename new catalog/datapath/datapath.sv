@@ -31,7 +31,8 @@ module datapath
     input  logic        clk, reset,
     input  logic        memtoreg, pcsrc,
     input  logic        alusrc, regdst,
-    input  logic        regwrite, jump,
+    input  logic [6:0]  regwrite, 
+    input  logic        jump,
     input  logic [3:0]  alucontrol,
     output logic        zero,
     output logic [(n-1):0] pc,
@@ -42,15 +43,18 @@ module datapath
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    wire [6:0]  writereg, muxreg;
-    wire [(n-1):0] pcnext, pcnextbr, pcnextj, pcnextj2, pcplus4, pcbranch;
-    wire [(n-1):0] signimm, signimmsh;
-    wire [(n-1):0] srca, srcb;
-    wire [(n-1):0] result;
-    wire jrsrc, jalsrc, hi, lo;
+    logic [(n-1):0] pcnext, pcnextbr, pcnextj, pcnextj2, pcplus4, pcbranch;
+    logic [(n-1):0] signimm, signimmsh;
+    logic [(n-1):0] srca, srcb;
+    logic [(n-1):0] result;
+    logic jrsrc, jalsrc, hi, lo;
+    logic [6:0] writereg;
 
-    initial begin
-        pcnext <= 32b'0;
+    // Ensure initial block does not cause elaboration issues:
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            pcnext <= 32'b0;  // Reset pcnext to 0 on reset
+        end
     end
 
     // "next PC" logic
@@ -67,7 +71,7 @@ module datapath
     // register file logic
     // From regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
     regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
-    mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg);
+    mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg); // error
     mux2 #(n)   resmux(aluout, readdata, memtoreg, result);
     signext     se(instr[11:0], signimm);
 
