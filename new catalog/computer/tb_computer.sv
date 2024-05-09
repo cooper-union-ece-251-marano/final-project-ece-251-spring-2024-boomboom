@@ -74,7 +74,7 @@ module tb_computer;
   logic reset;
   wire memwrite;
   wire [31:0] writedata;
-  wire [31:0] jalout, dataadr;
+  wire [31:0] dataadr;
   logic firstTest, secondTest;
   logic hi, lo;
 
@@ -106,18 +106,13 @@ module tb_computer;
     $readmemh("fib.hex", dut.imem.RAM);
   end
 
-  // initialize test
-  initial begin
-    #0 clkenable <= 0; #50 reset <= 1; # 50; reset <= 0; #50 clkenable <= 1;
-    #100 $finish;
-  end
 
   // monitor what happens at posedge of clock transition
   always @(posedge clk)
-  begin/*
+  begin
       $display("+");
       $display("\t+instr = %8h",dut.instr);
-      $display("\t+op = 0b%6b",dut.cpu.c.op);
+      /*$display("\t+op = 0b%6b",dut.cpu.c.op);
       $display("\t+controls = 0b%9b",dut.cpu.c.md.controls);
       $display("\t+funct = 0b%4b",dut.cpu.c.ad.funct);
       $display("\t+aluop = 0b%2b",dut.cpu.c.ad.aluop);
@@ -148,9 +143,9 @@ module tb_computer;
   // run program
   // monitor what happens at negedge of clock transition
   always @(negedge clk) begin
-    /*$display("-");
+    $display("-");
     $display("\t+instr = %8h",dut.instr);
-    $display("\t+op = 0b%6b",dut.cpu.c.op);
+    /*$display("\t+op = 0b%6b",dut.cpu.c.op);
     $display("\t+controls = 0b%9b",dut.cpu.c.md.controls);
     $display("\t+funct = 0b%4b",dut.cpu.c.ad.funct);
     $display("\t+aluop = 0b%2b",dut.cpu.c.ad.aluop);
@@ -194,7 +189,7 @@ module tb_computer;
     if(memwrite) begin
       if(dataadr === 84 & writedata === 32'h96)
       begin
-        $display("Successfully wrote %4h at RAM[%3d]",writedata,dataadr);
+        $display("Successfully wrote %4h at RAM[%3d]", writedata, dataadr);
         firstTest = 1'b1;
       end
     end
