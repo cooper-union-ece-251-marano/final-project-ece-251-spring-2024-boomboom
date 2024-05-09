@@ -50,7 +50,7 @@ module datapath
     wire jrsrc, jalsrc, hi, lo;
 
     initial begin
-        pcnext <= 0;
+        pcnext <= 32b'0;
     end
 
     // "next PC" logic
