@@ -5,7 +5,7 @@
 // 
 //     Create Date: 2024-05-02
 //     Module Name: controller
-//     Description: 32-bit RISC-based CPU controller (MIPS)
+//     Description: 32-bit RISC-based CPU controller (cpu)
 //
 // Revision: 1.0
 //
@@ -28,7 +28,7 @@ module controller
     output logic       memtoreg, memwrite,
     output logic       pcsrc, alusrc,
     output logic       regdst, regwrite,
-    output logic       jump, jrsrc, jalsrc,
+    output logic       jump,
     output logic [3:0] alucontrol
 );
     //
@@ -36,7 +36,7 @@ module controller
     //
     logic [1:0] aluop;
     logic [3:0] funct;
-    logic       branch;
+    logic       branch, jrsrc, jalsrc;
     
     // CPU main decoder
     maindec md(op, memtoreg, memwrite, branch, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, aluop, funct);
