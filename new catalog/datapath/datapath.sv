@@ -5,7 +5,7 @@
 // 
 //     Create Date: 2024-05-02
 //     Module Name: datapath
-//     Description: 32-bit RISC-based CPU datapath (MIPS)
+//     Description: 32-bit RISC-based CPU datapath (cpu)
 //
 // Revision: 1.0
 //
@@ -31,13 +31,12 @@ module datapath
     input  logic        clk, reset,
     input  logic        memtoreg, pcsrc,
     input  logic        alusrc, regdst,
-    input  logic        regwrite, jump, jrsrc, jalsrc,
+    input  logic        regwrite, jump,
     input  logic [3:0]  alucontrol,
     output logic        zero,
-    output logic [(n-1):0] pc, jalout, // jalout defined
+    output logic [(n-1):0] pc, jalout,
     input  logic [(n-1):0] instr,
     output logic [(n-1):0] aluout, writedata, 
-    output logic hi, lo, // hi and lo added
     input  logic [(n-1):0] readdata
 );
     //
@@ -47,7 +46,8 @@ module datapath
     logic [(n-1):0] pcnext, pcnextbr, pcnextbr2, pcplus4, pcbranch;
     logic [(n-1):0] signimm, signimmsh;
     logic [(n-1):0] srca, srcb;
-    logic [(n-1):0] result;
+    logic [(n-1):0] result; // Q. 이 Y는 뭘까요?
+    logic jrsrc, jalsrc, hi, lo;
 
     // "next PC" logic
     dff #(n)    pcreg(clk, reset, pcnext, pc);
@@ -63,13 +63,13 @@ module datapath
     // register file logic
     // From regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
     regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
-    mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg); // instr[11:5] fixed
+    mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg);
     mux2 #(n)   resmux(aluout, readdata, memtoreg, result);
     signext     se(instr[11:0], signimm);
 
     // ALU logic
     mux2 #(n)   srcbmux(writedata, signimm, alusrc, srcb);
-    alu         alu(srca, srcb, alucontrol, aluout, hi, lo, zero); // hi and lo added
+    alu         alu(srca, srcb, alucontrol, aluout, zero);
     //jal
     mux2 #(n) jalMux(result, pcplus4, jalsrc, jalout);
     mux2 #(7) jalMux2(instr[18:12], 7'd127, jalsrc, muxreg);
