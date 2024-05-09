@@ -68,7 +68,7 @@ endmodule
 
 module tb_computer;
   parameter n = 32; // # bits to represent the instruction / ALU operand / general purpose register (GPR)
-  parameter m = 5;  // # bits to represent the address of the 2**m=32 GPRs in the CPU
+  parameter m = 7;  // # bits to represent the address of the 2**m=32 GPRs in the CPU
   logic clk;
   logic clkenable;
   logic reset;
