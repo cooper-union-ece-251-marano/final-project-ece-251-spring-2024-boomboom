@@ -75,11 +75,12 @@ module tbcomputer;
   logic memwrite;
   logic [31:0] writedata;
   logic [31:0] dataadr;
-
+  logic [31:0] jalout;
   logic firstTest, secondTest;
+  logic hi, lo;
 
   // instantiate the CPU as the device to be tested
-  computer dut(clk, reset, writedata, dataadr, memwrite);
+  computer dut(clk, reset, dataadr, writedata, jalout, memwrite);
   // generate clock to sequence tests
   // always
   //   begin
