@@ -19,23 +19,23 @@ module aludec
     #(parameter n = 32)(
         input logic [3:0] funct,
         input logic [1:0] aluop,
-        output logic [3:0] aluctrl
+        output logic [3:0] alucontrol
     );
 
     // Default initialization
-    initial aluctrl = 4'b0000;
+    initial alucontrol = 4'b0000;
 
     // Combinational logic to determine ALU control signal
     always @* begin
         case(aluop)
-            2'b01: aluctrl <= 4'b0010; // sub for BEQ
-	    	2'b10: aluctrl <= 4'b0001; // add for LW,SW,ADDI
-	    	2'b11: aluctrl <= 4'bxxxx; // for when not in use
+            2'b01: alucontrol <= 4'b0010; // sub for BEQ
+	    	2'b10: alucontrol <= 4'b0001; // add for LW,SW,ADDI
+	    	2'b11: alucontrol <= 4'bxxxx; // for when not in use
             default: begin
                 if (funct > 0) begin
-                    aluctrl <= funct;
+                    alucontrol <= funct;
                 end else begin
-                    aluctrl <= 4'bxxxx;
+                    alucontrol <= 4'bxxxx;
                 end
             end
         endcase
