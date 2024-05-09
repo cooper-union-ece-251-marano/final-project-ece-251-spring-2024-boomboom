@@ -22,12 +22,12 @@ module mux2
     //
     input  logic [(n-1):0] D0, D1,
     input  logic S,
-    output logic [(n-1):0] Y
+    output logic [(n-1):0] result
 );
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    assign Y = S ? D1 : D0;
+    assign result = S ? D1 : D0;
 endmodule
 
 `endif // MUX2
