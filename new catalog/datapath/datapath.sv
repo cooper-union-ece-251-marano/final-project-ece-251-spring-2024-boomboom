@@ -49,6 +49,10 @@ module datapath
     wire [(n-1):0] result;
     wire jrsrc, jalsrc, hi, lo;
 
+    initial begin
+        pcnext <= 0;
+    end
+
     // "next PC" logic
     dff #(n)    pcreg(clk, reset, pcnext, pc);
     adder       pcadd1(pc, 32'b100, pcplus4);
