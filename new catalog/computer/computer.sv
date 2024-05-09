@@ -31,7 +31,7 @@ module computer
     //
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
-    wire [(n-1):0] pc, instr, jalout, readdata;
+    wire [(n-1):0] pc, instr, readdata;
     
     // computer internal components
 
