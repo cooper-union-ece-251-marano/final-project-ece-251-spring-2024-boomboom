@@ -34,7 +34,7 @@ module datapath
     input  logic        regwrite, jump,
     input  logic [3:0]  alucontrol,
     output logic        zero,
-    output logic [(n-1):0] pc, jalout,
+    output logic [(n-1):0] pc,
     input  logic [(n-1):0] instr,
     output logic [(n-1):0] aluout, writedata, 
     input  logic [(n-1):0] readdata
@@ -43,7 +43,7 @@ module datapath
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
     wire [6:0]  writereg, muxreg;
-    wire [(n-1):0] pcnext, pcnextbr, pcnextbr2, pcplus4, pcbranch;
+    wire [(n-1):0] pcnext, pcnextbr, pcnextj, pcnextj2, pcplus4, pcbranch;
     wire [(n-1):0] signimm, signimmsh;
     wire [(n-1):0] srca, srcb;
     wire [(n-1):0] result;
@@ -55,9 +55,9 @@ module datapath
     sl2         immsh(signimm, signimmsh);
     adder       pcadd2(pcplus4, signimmsh, pcbranch);
     mux2 #(n)   pcbrmux(pcplus4, pcbranch, pcsrc, pcnextbr);
-    mux2 #(n)   pcmux(pcnextbr, {pcplus4[31:28], instr[25:0], 2'b00}, jump, pcnextbr2);
+    mux2 #(n)   pcmux(pcnextbr, {pcplus4[31:28], instr[25:0], 2'b00}, jump, pcnextj);
     
-    mux2 #(n)   jrmux(pcnextbr2, srca, jrsrc, pcnext);
+    mux2 #(n)   jrmux(pcnextj, srca, jrsrc, pcnextj2);
     // Comment: pcplus4[31:28] might need to be fixed here. Or not.
 
     // register file logic
@@ -71,7 +71,7 @@ module datapath
     mux2 #(n)   srcbmux(writedata, signimm, alusrc, srcb);
     alu         alu(srca, srcb, alucontrol, aluout, zero);
     //jal
-    mux2 #(n) jalMux(result, pcplus4, jalsrc, jalout);
+    mux2 #(n) jalMux(pcnextj2, result, jalsrc, pcnext);
     mux2 #(7) jalMux2(instr[18:12], 7'd127, jalsrc, muxreg);
 
 
