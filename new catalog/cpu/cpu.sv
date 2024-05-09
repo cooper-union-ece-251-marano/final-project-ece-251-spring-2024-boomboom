@@ -37,8 +37,7 @@ module cpu
     // cpu internal components
     wire       memtoreg, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, pcsrc, zero, hi, lo;
     wire [3:0] alucontrol;
-    wire [31:0] jalout; // Q.위에 output에 넣는게 나을까요? wire 로 하는게 나을까요? 아니면 이대로?
-    
+
     controller c(instr[(31):26], zero,
                     memtoreg, memwrite, pcsrc,
                     alusrc, regdst, regwrite, jump,
@@ -47,7 +46,7 @@ module cpu
     datapath dp(clk, reset, memtoreg, pcsrc,
                     alusrc, regdst, regwrite, jump,
                     alucontrol,
-                    zero, pc, jalout, instr,
+                    zero, pc, instr,
                     aluout, writedata, readdata); // hi and lo deleted
 
 endmodule
