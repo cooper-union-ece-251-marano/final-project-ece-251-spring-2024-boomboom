@@ -14,23 +14,21 @@
 `define IMEM
 
 `timescale 1ns/100ps
-
 module imem
     #(parameter n = 32, parameter r = 7)
     (
-    input logic [(r-1):0] addr,
-    output logic [(n-1):0] readdata
+        input logic [(r-1):0] addr,
+        output logic [(n-1):0] readdata
     );
 
-    logic [(n-1):0] RAM[(2**r)-1:0];  // Ensuring array bounds are clearly defined
+    logic [31:0] RAM[0:127];
+    
+    //initial begin
+    //    $readmemh("imem_check.dat", RAM);
+    //end
+    
 
-    // Initialize memory
-    initial begin
-        $readmemh("mult-prog_exe.hex");  // Load the actual program
-    end
-
-    assign readdata = RAM[addr];  // Word aligned access
+    assign readdata = RAM[addr]; 
 
 endmodule
-
 `endif // IMEM
