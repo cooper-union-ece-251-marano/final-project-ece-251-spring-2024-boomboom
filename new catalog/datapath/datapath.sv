@@ -48,14 +48,14 @@ module datapath
     logic [(n-1):0] srca, srcb;
     logic [(n-1):0] result;
     logic jrsrc, jalsrc, hi, lo;
-    logic [6:0] writereg;
+    logic [6:0] muxreg, writereg;
 
-    // Ensure initial block does not cause elaboration issues:
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset) begin
-            pcnext <= 32'b0;  // Reset pcnext to 0 on reset
-        end
-    end
+    // "next PC" register
+    // always_ff @(posedge clk or posedge reset) begin
+    //     if (reset) begin
+    //         pcnext <= 32'b0;  // Reset pcnext to 0 on reset
+    //     end
+    // end
 
     // "next PC" logic
     dff #(n)    pcreg(clk, reset, pcnext, pc);
