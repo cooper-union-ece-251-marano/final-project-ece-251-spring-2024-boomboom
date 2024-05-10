@@ -10,53 +10,6 @@
 // Revision: 1.0
 //
 //////////////////////////////////////////////////////////////////////////////////
-/*`ifndef TBCOMPUTER
-`define TBCOMPUTER
-
-`timescale 1ns/100ps
-
-`include "computer.sv"
-`include "../clock/clock.sv"
-
-module tbcomputer;
-  parameter n = 32; // # bits to represent the instruction / ALU operand / general purpose register (GPR)
-  parameter m = 5;  // # bits to represent the address of the 2**m=32 GPRs in the CPU
-  logic clk;
-  logic clkenable;
-  logic reset;
-  logic memwrite;
-  logic [n-1:0] writedata, dataadr, jalout;
-  logic hi, lo;
-
-  // Load Fibonacci machine code into instruction memory
-  initial begin
-    $readmemh("fib.hex", dut.imem.RAM);
-  end
-
-  // Initialize necessary registers
-  initial begin
-    reset <= 1;
-    clkenable <= 0;
-    // Set initial values for registers
-    // $a0 - Number of Fibonacci numbers to generate (e.g., 10)
-    #50 reset <= 0;
-    #50 clkenable <= 1;
-    $finish;
-  end
-  // Instantiate the computer module and clock
-  computer dut(clk, reset, dataadr, writedata, jalout, memwrite, hi, lo);
-  clock dut1(.ENABLE(clkenable), .CLOCK(clk));
-
-  // Monitoring changes in the simulation
-  initial begin
-    $monitor("Time: %t, Reset: %b, clk: %b, Data Address: %h, Write Data: %h, jalout: %h, memwrite: %b, hi: %b, lo: %b",
-             $time, reset, clk, dataadr, writedata, jalout, memwrite, hi, lo);
-  end
-
-  // Add any additional monitoring or checks here
-endmodule 
-`endif // TBCOMPUTER*/
-
 `ifndef TBCOMPUTER
 `define TBCOMPUTER
 
@@ -64,6 +17,48 @@ endmodule
 
 `include "computer.sv"
 `include "../clock/clock.sv"
+
+// module tb_computer();
+//     reg clk;
+//     reg reset;
+//     wire [31:0] writedata, dataadr;
+//     wire memwrite;
+//     // instantiate device to be tested
+//     computer dut (clk, reset, writedata, dataadr, memwrite);
+//     // initialize test
+
+//     initial begin
+//         $dumpfile("tb_computer.vcd");
+//         $dumpvars(0, clk, dut,tb_computer);
+//         $monitor("clk=%b reset=%b writedata=%d dataadr=%d memwrite=%b", clk, reset, writedata, dataadr, memwrite);
+//     end
+
+//     initial
+//         begin
+//         #0 reset <= 1;
+//         #22 reset <= 0;
+//         end
+//     // generate clock to sequence tests
+//     always
+//         begin
+//         clk <= 1; # 5; clk <= 0; # 5;
+//         end
+//     // check results
+//     always @ (negedge clk)
+//         begin
+//         if (memwrite) begin
+//             $display("dataadr=%d writedata=%d", dataadr, writedata);
+//             if (dataadr === 84 & writedata === 7) begin
+//                 $display ("Simulation succeeded");
+//                 $finish;
+//             end else if (dataadr !== 80) begin
+//                 $display ("Simulation failed");
+//                 $finish; //$stop;
+//             end
+//         end
+//         end
+// endmodule
+// `endif 
 
 
 module tb_computer;
@@ -93,7 +88,7 @@ module tb_computer;
   initial begin
     firstTest = 1'b0;
     secondTest = 1'b0;
-    $dumpfile("tbcomputer.vcd");
+    $dumpfile("tb_computer.vcd");
     $dumpvars(0,dut1,dut,clk,reset,writedata,dataadr,memwrite);
     $monitor("t=%t\t%7h\t%7d\t%8d",$realtime,writedata,dataadr,memwrite);
     // $dumpvars(0,clk,a,b,ctrl,result,zero,negative,carryOut,overflow);
@@ -103,7 +98,8 @@ module tb_computer;
 
   // Testing fib
   initial begin
-    $readmemh("fib.hex", dut.imem.RAM);
+    //$readmemh("fib.hex", dut.imem.RAM);
+    $readmemh("check.hex", dut.imem.RAM);
   end
 
 
