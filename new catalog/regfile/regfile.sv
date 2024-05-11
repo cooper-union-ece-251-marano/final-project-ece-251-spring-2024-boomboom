@@ -39,11 +39,11 @@ module regfile
     // note: for pipelined processor, write third port
     // on falling edge of clk
 
-    initial begin
+    /*initial begin
 	for (i = 0; i < 2**r; i = i + 1) begin
 		rf[i] <=0;
 	end
-    end
+    end*/
 
 
 
@@ -51,10 +51,11 @@ module regfile
         rf[0] <= 0;
         @(posedge clk)
             if (we3) rf[wa3] <= wd3;
-
-                assign rd1 = (ra1 != 0) ? rf[ra1] : 0;
-                assign rd2 = (ra2 != 0) ? rf[ra2] : 0;
     end
+	
+	assign rd1 = (ra1 != 0) ? rf[ra1] : 0;
+        assign rd2 = (ra2 != 0) ? rf[ra2] : 0;
+
 endmodule
 
 `endif // REGFILE
