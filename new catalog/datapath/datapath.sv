@@ -32,7 +32,7 @@ module datapath
     input  logic        memtoreg, pcsrc,
     input  logic        alusrc, regdst,
     input  logic	regwrite, 
-    input  logic        jump,
+    input  logic        jump, jrsrc, jalsrc,
     input  logic [3:0]  alucontrol,
     output logic        zero,
     output logic [(n-1):0] pc,
@@ -47,7 +47,7 @@ module datapath
     logic [(n-1):0] signimm, signimmsh;
     logic [(n-1):0] srca, srcb;
     logic [(n-1):0] result;
-    logic jrsrc, jalsrc, hi, lo;
+    logic hi, lo;
     logic [6:0] muxreg, writereg;
 
 

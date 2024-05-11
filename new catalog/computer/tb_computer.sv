@@ -34,11 +34,6 @@ module tb_computer;
 
   // instantiate the CPU as the device to be tested
   computer dut(clk, reset, dataadr, writedata, memwrite);
-  // generate clock to sequence tests
-  // always
-  //   begin
-  //     clk <= 1; # 5; clk <= 0; # 5;
-  //   end
 
   // instantiate the clock
   clock dut1(.ENABLE(clkenable), .CLOCK(clk));
@@ -67,21 +62,24 @@ module tb_computer;
   begin
       $display("+");
       $display("\t+pc = %8h" ,dut.cpu.dp.pc);
+      $display("\t+pcplus4 = %8h" ,dut.cpu.dp.pcplus4);
+      $display("\t+pcnextb4 = %8h" ,dut.cpu.dp.pcnextbr);
+      $display("\t+pcnextj = %8h" ,dut.cpu.dp.pcnextj);
+      $display("\t+pcnextj2 = %8h" ,dut.cpu.dp.pcnextj2);
+      $display("\t+jrsrc = %1b" ,dut.cpu.dp.jrmux.S);
+      $display("\t+pcnext = %8h" ,dut.cpu.dp.pcnext);
       $display("\t+instr = %8h" ,dut.instr);
       $display("\t+op = %6b",dut.cpu.c.op);
       $display("\t+controls = %9b",dut.cpu.c.md.controls);
       $display("\t+funct = %4b",dut.cpu.c.ad.funct);
       $display("\t+aluop = %2b",dut.cpu.c.ad.aluop);
       $display("\t+alucontrol = %4b",dut.cpu.c.ad.alucontrol);
-      $display("\t+alu A = %8h", dut.cpu.dp.alu.A);
+      $display("\t+source a = %8h", dut.cpu.dp.rf.rd1);
       $display("\t+alu B = %8h", dut.cpu.dp.alu.B);
       $display("\t+result = %8h", dut.cpu.dp.alu.result);
       $display("\t+$v0 = %8h",dut.cpu.dp.rf.rf[3]);
-      $display("\t+$v1 = %8h",dut.cpu.dp.rf.rf[4]);
       $display("\t+$a0 = %8h",dut.cpu.dp.rf.rf[11]);
-      //$display("\t+$a1 = %4h",dut.cpu.dp.rf.rf[12]);
       $display("\t+$t0 = %8h",dut.cpu.dp.rf.rf[21]);
-      //$display("\t+$t1 = %4h",dut.cpu.dp.rf.rf[22]);
       $display("\t+$s0 = %8h",dut.cpu.dp.rf.rf[41]);
       $display("\t+$s1 = %8h",dut.cpu.dp.rf.rf[42]);
       $display("\t+$s2 = %8h",dut.cpu.dp.rf.rf[43]);

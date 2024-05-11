@@ -31,13 +31,21 @@ module regfile
     // ---------------- MODULE DESIGN IMPLEMENTATION ----------------
     //
     logic [(n-1):0] rf[(2**7-1):0];
-
+    integer i;
     // three ported register file
     // read two ports combinationally
     // write third port on rising edge of clk
     // register 0 hardwired to 0
     // note: for pipelined processor, write third port
     // on falling edge of clk
+
+    initial begin
+	for (i = 0; i < 2**r; i = i + 1) begin
+		rf[i] <=0;
+	end
+    end
+
+
 
     always begin
         rf[0] <= 0;
