@@ -36,7 +36,7 @@ module cpu
 
     // cpu internal components
     wire       memtoreg, alusrc, regdst, jump, jrsrc, jalsrc, pcsrc, zero, hi, lo;
-    wire [6:0] regwrite;
+    wire      regwrite;
     wire [3:0] alucontrol;
 
     controller c(instr[(31):26], zero,

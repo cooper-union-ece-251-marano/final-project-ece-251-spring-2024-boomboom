@@ -31,7 +31,7 @@ module datapath
     input  logic        clk, reset,
     input  logic        memtoreg, pcsrc,
     input  logic        alusrc, regdst,
-    input  logic [6:0]  regwrite, 
+    input  logic	regwrite, 
     input  logic        jump,
     input  logic [3:0]  alucontrol,
     output logic        zero,
@@ -50,12 +50,6 @@ module datapath
     logic jrsrc, jalsrc, hi, lo;
     logic [6:0] muxreg, writereg;
 
-    // "next PC" register
-    // always_ff @(posedge clk or posedge reset) begin
-    //     if (reset) begin
-    //         pcnext <= 32'b0;  // Reset pcnext to 0 on reset
-    //     end
-    // end
 
     // "next PC" logic
     dff #(n)    pcreg(clk, reset, pcnext, pc);

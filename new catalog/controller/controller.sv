@@ -28,7 +28,7 @@ module controller
     output logic       memtoreg, memwrite,
     output logic       pcsrc, alusrc,
     output logic       regdst,
-    output logic [6:0] regwrite,
+    output logic       regwrite,
     output logic       jump,
     output logic [3:0] alucontrol
 );

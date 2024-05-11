@@ -24,7 +24,7 @@ module maindec
     output logic       memtoreg, memwrite,
     output logic       branch, alusrc,
     output logic       regdst, 
-    output logic [6:0] regwrite,
+    output logic       regwrite,
     output logic       jump, jrsrc, jalsrc,
     output logic [1:0] aluop,
     output logic [3:0] funct
