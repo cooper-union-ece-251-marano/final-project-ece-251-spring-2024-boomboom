@@ -59,7 +59,7 @@ module maindec
             6'b100000: controls <= 9'b101010000; // lw
             6'b100001: controls <= 9'b001001000; // sw
             6'b100010: controls <= 9'b101000000; // addi
-	    6'b101011: controls <= 9'b101000000; // subi
+	    6'b100011: controls <= 9'b101000000; // subi
 
             6'b110000: controls <= 9'b000000100; // j
             6'b110001: controls <= 9'b100000101; // jal
