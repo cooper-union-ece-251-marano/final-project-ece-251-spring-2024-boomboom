@@ -41,14 +41,14 @@ module cpu
 
     controller c(instr[(31):26], zero,
                     memtoreg, memwrite, pcsrc,
-                    alusrc, regdst, regwrite, jump,
+                    alusrc, regdst, regwrite, jump, jrsrc, jalsrc,
                     alucontrol);
 
     datapath dp(clk, reset, memtoreg, pcsrc,
-                    alusrc, regdst, regwrite, jump,
+                    alusrc, regdst, regwrite, jump, jrsrc, jalsrc,
                     alucontrol,
                     zero, pc, instr,
-                    aluout, writedata, readdata); // hi and lo deleted
+                    aluout, writedata, readdata);
 
 endmodule
 

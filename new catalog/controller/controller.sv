@@ -29,7 +29,7 @@ module controller
     output logic       pcsrc, alusrc,
     output logic       regdst,
     output logic       regwrite,
-    output logic       jump,
+    output logic       jump, jrsrc, jalsrc,
     output logic [3:0] alucontrol
 );
     //
@@ -37,7 +37,7 @@ module controller
     //
     wire [1:0] aluop;
     logic [3:0] funct;
-    wire       branch, jrsrc, jalsrc;
+    wire       branch;
     
     // CPU main decoder
     maindec md(op, memtoreg, memwrite, branch, alusrc, regdst, regwrite, jump, jrsrc, jalsrc, aluop, funct);
