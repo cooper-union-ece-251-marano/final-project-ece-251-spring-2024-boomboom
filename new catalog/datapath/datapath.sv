@@ -60,10 +60,8 @@ module datapath
     mux2 #(n)   pcmux(pcnextbr, {pcplus4[31:28], instr[25:0], 2'b00}, jump, pcnextj);
     
     mux2 #(n)   jrmux(pcnextj, srca, jrsrc, pcnextj2);
-    // Comment: pcplus4[31:28] might need to be fixed here. Or not.
 
     // register file logic
-    // From regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
     regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
     mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg); // error
     mux2 #(n)   resmux(aluout, readdata, memtoreg, result);
