@@ -28,13 +28,8 @@ module aludec
     // Combinational logic to determine ALU control signal
     always @* begin
         case(aluop)
-            2'b01: alucontrol <= 4'b0010; // sub for BEQ
-	    2'b10: 
-		    if(funct == 0011) begin
-			    alucontrol <= 4'b0010; //sub for SUBI
-		    end else begin
-		    	    alucontrol <= 4'b0001; // add for LW,SW,ADDI
-		    end
+            2'b01: alucontrol <= 4'b0010; // sub for BEQ, SUBI
+	    2'b10: alucontrol <= 4'b0001; // add for LW,SW,ADDI
 	    2'b11: alucontrol <= 4'b0001; // for when not in use
             default: begin
                 if (funct > 0) begin
