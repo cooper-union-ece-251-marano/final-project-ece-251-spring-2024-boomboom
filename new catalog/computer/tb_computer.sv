@@ -86,8 +86,6 @@ module tb_computer;
 
 
   initial begin
-    firstTest = 1'b0;
-    secondTest = 1'b0;
     $dumpfile("tb_computer.vcd");
     $dumpvars(0,dut1,dut,clk,reset,writedata,dataadr,memwrite);
     $monitor("t=%t\t%7h\t%7d\t%8d",$realtime,writedata,dataadr,memwrite);
@@ -98,12 +96,17 @@ module tb_computer;
 
   // Testing fib
   initial begin
-    //$readmemh("fib.hex", dut.imem.RAM);
-    $readmemh("check.hex", dut.imem.RAM);
+    $readmemh("fib.hex", dut.imem.RAM);
   end
 
+  initial begin
+	  #0 clkenable <= 0;
+	  #50 reset <= 1;
+	  #50 reset <= 1;
+	  #50 clkenable <= 1;
+  end
 
-  // monitor what happens at posedge of clock transition
+  /* monitor what happens at posedge of clock transition
   always @(posedge clk)
   begin
       $display("+");
@@ -116,14 +119,14 @@ module tb_computer;
       $display("\t+alu result = %8h",dut.cpu.dp.alu.result);
       // $display("\t+HiLo = %8h",dut.cpu.dp.alu.HiLo);
       $display("\t+$v0 = %8h",dut.cpu.dp.rf.rf[3]);
-      $display("\t+$v1 = %8h",dut.cpu.dp.rf.rf[4]);*/
+      $display("\t+$v1 = %8h",dut.cpu.dp.rf.rf[4]);
       $display("\t+$a0 = %8h",dut.cpu.dp.rf.rf[11]);
       // $display("\t+$a1 = %4h",dut.cpu.dp.rf.rf[12]);
       /*$display("\t+$t0 = %8h",dut.cpu.dp.rf.rf[21]);
       // $display("\t+$t1 = %4h",dut.cpu.dp.rf.rf[22]);
       $display("\t+$s0 = %8h",dut.cpu.dp.rf.rf[41]);
       $display("\t+$s1 = %8h",dut.cpu.dp.rf.rf[42]);
-      $display("\t+$s2 = %8h",dut.cpu.dp.rf.rf[43]);*/
+      $display("\t+$s2 = %8h",dut.cpu.dp.rf.rf[43]);
       $display("\t+$s3 = %8h",dut.cpu.dp.rf.rf[44]);
       /*$display("\t+regfile -- ra1 = %d",dut.cpu.dp.rf.ra1);
       $display("\t+regfile -- ra2 = %d",dut.cpu.dp.rf.ra2);
@@ -133,7 +136,7 @@ module tb_computer;
       $display("\t+regfile -- rd1 = %d",dut.cpu.dp.rf.rd1);
       $display("\t+regfile -- rd2 = %d",dut.cpu.dp.rf.rd2);
       $display("\t+RAM[%4d] = %4d",dut.dmem.addr,dut.dmem.readdata);
-      $display("writedata\tdataadr\tmemwrite");*/
+      $display("writedata\tdataadr\tmemwrite");
   end
 
   // run program
@@ -148,14 +151,14 @@ module tb_computer;
     $display("\t+alucontrol = 0b%4b",dut.cpu.c.ad.alucontrol);
     $display("\t+alu result = %8h",dut.cpu.dp.alu.result);
     $display("\t+$v0 = %8h",dut.cpu.dp.rf.rf[3]);
-    $display("\t+$v1 = %8h",dut.cpu.dp.rf.rf[4]);*/
+    $display("\t+$v1 = %8h",dut.cpu.dp.rf.rf[4]);
     $display("\t+$a0 = %8h",dut.cpu.dp.rf.rf[11]);
     // $display("\t+$a1 = %4h",dut.cpu.dp.rf.rf[12]);
     /*$display("\t+$t0 = %8h",dut.cpu.dp.rf.rf[21]);
     // $display("\t+$t1 = %4h",dut.cpu.dp.rf.rf[22]);
     $display("\t+$s0 = %8h",dut.cpu.dp.rf.rf[41]);
     $display("\t+$s1 = %8h",dut.cpu.dp.rf.rf[42]);
-    $display("\t+$s2 = %8h",dut.cpu.dp.rf.rf[43]);*/
+    $display("\t+$s2 = %8h",dut.cpu.dp.rf.rf[43]);
     $display("\t+$s3 = %8h",dut.cpu.dp.rf.rf[44]);
     /*$display("\t-regfile -- ra1 = %d",dut.cpu.dp.rf.ra1);
     $display("\t-regfile -- ra2 = %d",dut.cpu.dp.rf.ra2);
@@ -165,7 +168,7 @@ module tb_computer;
     $display("\t-regfile -- rd1 = %d",dut.cpu.dp.rf.rd1);
     $display("\t-regfile -- rd2 = %d",dut.cpu.dp.rf.rd2);
     $display("\t+RAM[%4d] = %4d",dut.dmem.addr,dut.dmem.readdata);
-    $display("writedata\tdataadr\tmemwrite");*/
+    $display("writedata\tdataadr\tmemwrite");
   end
 
   always @(negedge clk, posedge clk) begin
@@ -194,7 +197,7 @@ module tb_computer;
         $display("Program successfully completed");
         $finish;
     end
-  end
+  end*/
 
 endmodule
 
