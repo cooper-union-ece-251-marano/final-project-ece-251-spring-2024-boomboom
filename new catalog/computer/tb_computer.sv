@@ -73,8 +73,9 @@ module tb_computer;
       $display("\t+funct = %4b",dut.cpu.c.ad.funct);
       $display("\t+aluop = %2b",dut.cpu.c.ad.aluop);
       $display("\t+alucontrol = %4b",dut.cpu.c.ad.alucontrol);
-      $display("\t+alu result = %8h",dut.cpu.dp.alu.result);
-      // $display("\t+HiLo = %8h",dut.cpu.dp.alu.HiLo);
+      $display("\t+alu A = %8h", dut.cpu.dp.alu.A);
+      $display("\t+alu B = %8h", dut.cpu.dp.alu.B);
+      $display("\t+result = %8h", dut.cpu.dp.alu.result);
       $display("\t+$v0 = %8h",dut.cpu.dp.rf.rf[3]);
       $display("\t+$v1 = %8h",dut.cpu.dp.rf.rf[4]);
       $display("\t+$a0 = %8h",dut.cpu.dp.rf.rf[11]);
@@ -155,8 +156,8 @@ module tb_computer;
     begin
         $display("Program successfully completed");
         $finish;
-    end*/
-  end
+    end
+  end*/
 
 endmodule
 
