@@ -47,7 +47,7 @@ module datapath
     logic [(n-1):0] signimm, signimmsh;
     logic [(n-1):0] srca, srcb;
     logic [(n-1):0] result;
-    logic [(n-1):0] scr, scr2;
+    logic [(n-1):0] datatowrite;
     logic hi, lo;
     logic [6:0] muxreg, writereg;
 

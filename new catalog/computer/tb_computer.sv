@@ -48,7 +48,7 @@ module tb_computer;
 
   // Testing fib
   initial begin
-    $readmemb("leaf.dat", dut.imem.RAM);
+    $readmemb("fib.dat", dut.imem.RAM);
   end
 
   initial begin
@@ -80,19 +80,19 @@ module tb_computer;
       $display("\t+alu B = %8h", dut.cpu.dp.alu.B);
       $display("\t+ALU result = %8h", dut.cpu.dp.alu.result);
       //$display("\t+resmux = %8h", dut.cpu.dp.resmux.result);
-      //$display("\t+$v0 = %8h",dut.cpu.dp.rf.rf[3]);
+      $display("\t+$v0 = %8h",dut.cpu.dp.rf.rf[3]);
       $display("\t+$a0 = %8h",dut.cpu.dp.rf.rf[11]);
       $display("\t+$t0 = %8h",dut.cpu.dp.rf.rf[21]);
-      $display("\t+$t1 = %8h",dut.cpu.dp.rf.rf[22]);
-      $display("\t+$t2 = %8h",dut.cpu.dp.rf.rf[23]);
-      $display("\t+$t3 = %8h",dut.cpu.dp.rf.rf[24]);
-      $display("\t+$t4 = %8h",dut.cpu.dp.rf.rf[25]);
-      //$display("\t+$s0 = %8h",dut.cpu.dp.rf.rf[41]);
-      //$display("\t+$s1 = %8h",dut.cpu.dp.rf.rf[42]);
-      //$display("\t+$s2 = %8h",dut.cpu.dp.rf.rf[43]);
-      //$display("\t+$s3 = %8h",dut.cpu.dp.rf.rf[44]);
-      //$display("\t+$sp = %8h",dut.cpu.dp.rf.rf[125]);
-      //$display("\t+$ra = %8h",dut.cpu.dp.rf.rf[127]);
+      //$display("\t+$t1 = %8h",dut.cpu.dp.rf.rf[22]);
+      //$display("\t+$t2 = %8h",dut.cpu.dp.rf.rf[23]);
+      //$display("\t+$t3 = %8h",dut.cpu.dp.rf.rf[24]);
+      //$display("\t+$t4 = %8h",dut.cpu.dp.rf.rf[25]);
+      $display("\t+$s0 = %8h",dut.cpu.dp.rf.rf[41]);
+      $display("\t+$s1 = %8h",dut.cpu.dp.rf.rf[42]);
+      $display("\t+$s2 = %8h",dut.cpu.dp.rf.rf[43]);
+      $display("\t+$s3 = %8h",dut.cpu.dp.rf.rf[44]);
+      $display("\t+$sp = %8h",dut.cpu.dp.rf.rf[125]);
+      $display("\t+$ra = %8h",dut.cpu.dp.rf.rf[127]);
       $display("\t+instr[25:19] -- ra1 = %7b",dut.cpu.dp.rf.ra1);
       $display("\t+instr[18:12] -- ra2 = %7b",dut.cpu.dp.rf.ra2);
 
