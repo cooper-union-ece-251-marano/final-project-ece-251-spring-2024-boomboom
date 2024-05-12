@@ -1,8 +1,8 @@
 # Final Project: Building and Simulating a MIPS-based RISC.
-## University: The Cooper Union of Advanced Science and Arts
-## Course Name: ECE 251 Computer Architecture
-## Instructor Name: Professor Rob Marano
-## Teammates: Anthony Kwon, Jonghyeok (Burt) Kim
+University: The Cooper Union of Advanced Science and Arts
+Course Name: ECE 251 Computer Architecture
+Instructor Name: Professor Rob Marano
+Teammates: Anthony Kwon, Jonghyeok (Burt) Kim
 
 ## Explanation of How Our Computer Works
 ### Instruction Types
