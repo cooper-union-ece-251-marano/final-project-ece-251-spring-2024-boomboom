@@ -1,9 +1,11 @@
-University: The Cooper Union of Advanced Science and Arts
-Course Name: ECE 251 Computer Architecture
-Instructor Name: Professor Rob Marano
-Final Project: Building and Simulating a MIPS-based RISC.
-Teammates: Anthony Kwon, Jonghyeok (Burt) Kim
+# Final Project: Building and Simulating a MIPS-based RISC.
+## University: The Cooper Union of Advanced Science and Arts
+## Course Name: ECE 251 Computer Architecture
+## Instructor Name: Professor Rob Marano
+## Teammates: Anthony Kwon, Jonghyeok (Burt) Kim
 
+## Explanation of How Our Computer Works
+### Instruction Types
 Our computer is built using 32-bit MIPS words featuring unique instruction formats.
 Rather than using common basic instruction formats, our computer runs based on the following basic instruction formats:
 R type: instr[31:26] = OP code, instr[25:19] = rs, instr[18:12] = rt, instr[11:5] = rd, instr[4:0] = shamt
@@ -19,6 +21,7 @@ Instruction type correseonding to the first two digits of OP code:
 By employing this approach, we can utilize 7-bit registers.
 The cons of constructing this computer is that we can have fewer instructions than other computers have.
 
+### Registers
 We set our registers as the following numbers(decimal):
 0: $zero
 1: Hi
@@ -32,6 +35,7 @@ We set our registers as the following numbers(decimal):
 126: $fp (frame pointer)
 127: $ra (return address)
 
+### Test bench
 To test our computer, we're simulating a Fibonacci function. 
 First initial value is set as 10 in the instruction memory.
 The output of the testbench(tb_computer) must be 10th order of fibonacci sequence, which is 89.
