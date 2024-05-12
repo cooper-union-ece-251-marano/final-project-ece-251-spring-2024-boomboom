@@ -33,9 +33,8 @@ We set our registers as the following numbers(decimal):
 127: $ra (return address)
 
 To test our computer, we're simulating a Fibonacci function. 
-When a user runs a test bench in the "computer" folder, they are prompted to enter a number representing the position in the Fibonacci sequence.
-Let's suppose we put "n" as our input.
-Then, the output must be nth order of fibonacci sequence.
+First initial value is set as 10 in the instruction memory.
+The output of the testbench(tb_computer) must be 10th order of fibonacci sequence, which is 89.
 
 Thank you,
 Jonghyeok (Burt) Kim and Anthony Kwon 
