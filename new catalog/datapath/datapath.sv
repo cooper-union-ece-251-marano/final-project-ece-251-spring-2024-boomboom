@@ -47,6 +47,7 @@ module datapath
     logic [(n-1):0] signimm, signimmsh;
     logic [(n-1):0] srca, srcb;
     logic [(n-1):0] result;
+    logic [(n-1):0] scr, scr2;
     logic hi, lo;
     logic [6:0] muxreg, writereg;
 
@@ -59,11 +60,11 @@ module datapath
     mux2 #(n)   pcbrmux(pcplus4, pcbranch, pcsrc, pcnextbr);
     mux2 #(n)   pcmux(pcnextbr, {pcplus4[31:28], instr[25:0], 2'b00}, jump, pcnextj);
     
-    mux2 #(n)   jrmux(pcnextj, srca, jrsrc, pcnextj2);
+    mux2 #(n)   jrmux(pcnextj, srca, jrsrc, pcnext);
 
     // register file logic
-    regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, result, srca, writedata);
-    mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg); // error
+    regfile     rf(clk, regwrite, instr[25:19], instr[18:12], writereg, datatowrite, srca, writedata);
+    mux2 #(7)   wrmux(muxreg, instr[11:5], regdst, writereg);
     mux2 #(n)   resmux(aluout, readdata, memtoreg, result);
     signext     se(instr[11:0], signimm);
 
@@ -71,8 +72,11 @@ module datapath
     mux2 #(n)   srcbmux(writedata, signimm, alusrc, srcb);
     alu         alu(srca, srcb, alucontrol, aluout, zero);
     //jal
-    mux2 #(n) jalMux(pcnextj2, result, jalsrc, pcnext);
-    mux2 #(7) jalMux2(instr[18:12], 7'd127, jalsrc, muxreg);
+    //mux2 #(n) jalMux(pcnextj2, result, jalsrc, pcnext);
+    //regfile    rf(clk, regwrite, instr[25:19], instr[18:12], 7'b1111011, pcplus4, scr, scr2);
+    mux2 #(n) jalMux(result, pcplus4, jalsrc, datatowrite);
+    mux2 #(7) jalMux2(instr[18:12], 7'b1111111, jalsrc, muxreg);
+
 
 
 endmodule
