@@ -3,9 +3,7 @@
 .text
 .globl main         
 main:
-    addi $v0, $zero, 5 
-    syscall  
-    addi $a0, $v0, 0
+    addi $a0, $zero, 10
     jal fib
     add $a0, $v0, $zero 
     jal print_int 
