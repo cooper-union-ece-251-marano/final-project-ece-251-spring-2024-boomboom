@@ -59,11 +59,39 @@ We set our registers as the following numbers(decimal):
 127: $ra (return address)
 
 ### Test bench
-To test our computer, we're simulating a Fibonacci function. 
+### 1. Fibonacci Function
 
-First initial value is set as 10 in the instruction memory.
+An initial input is set to be 10.
 
 The output of the testbench(tb_computer) must be 10th order of fibonacci sequence, which is 89.
+
+### 2. Leaf Procedure
+
+An initial value of $to is set to be 0, and an initial value of $a0 is set to be 10.
+
+For every loop, $t0 is incremented by 1.
+
+When $t0's value equals to the value of $a0, the for loop breaks.
+
+### 3. Nested Procedure
+
+In outer_proc, space is allocated on the stack by decrementing the stack pointer $sp by 4 bytes using addi $sp, $sp, -4. 
+
+The return address ($ra) is then stored on the stack using sw $ra, 0($sp).
+
+The jal instruction is used again to call the inner_proc.
+
+Inside inner_proc, the system call to print an integer (syscall) is invoked. 
+
+In this case, the integer value 123 is loaded into register $a0, and the system call code 1 (which represents printing an integer) is loaded into register $v0.
+
+After printing the integer, the jr $ra instruction is used to return from the inner_proc procedure, jumping back to the return address stored in $ra.
+
+Back in outer_proc, the return address is retrieved from the stack using lw $ra, 0($sp), and the stack pointer is incremented to deallocate the space used for the return address.
+
+Finally, jr $ra is used to return from outer_proc, jumping back to the return address stored in $ra when main called outer_proc. 
+
+This effectively returns control back to main, which then ends the instruction by loading 10 into $v0.
 
 Thank you,
 
