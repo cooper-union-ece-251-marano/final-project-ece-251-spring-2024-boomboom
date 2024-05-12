@@ -48,7 +48,7 @@ module tb_computer;
 
   // Testing fib
   initial begin
-    $readmemb("fib.dat", dut.imem.RAM);
+    $readmemb("fib2.dat", dut.imem.RAM);
   end
 
   initial begin
