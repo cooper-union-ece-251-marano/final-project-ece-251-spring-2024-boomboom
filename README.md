@@ -31,7 +31,7 @@ Instruction type correseonding to the first two digits of OP code:
 
 By employing this approach, we can utilize 7-bit registers.
 
-The cons of constructing this computer is that we can have fewer instructions than other computers have.
+The cons of constructing this computer is that we can have fewer room for immediate in I type operations.
 
 ### Registers
 We set our registers as the following numbers(decimal):
@@ -50,6 +50,8 @@ We set our registers as the following numbers(decimal):
 
 41-120: $s0-$s79 (Saved temporaries)
 
+123: $pc (program counter)
+
 124: $gp (global pointer)
 
 125: $sp (stack pointer)
@@ -61,37 +63,13 @@ We set our registers as the following numbers(decimal):
 ### Test bench
 ### 1. Fibonacci Function
 
-An initial input is set to be 10.
+To run the fibonacci sequence, the tb_computer.sv needs to be changed to the file "fib.dat".
 
-The output of the testbench(tb_computer) must be 10th order of fibonacci sequence, which is 89.
+An initial input is set to be 9, which could be changed by altering the binary vlaues of the fib.dat file.
 
-### 2. Leaf Procedure
+The output of the testbench(tb_computer) must be 9th order of fibonacci sequence, which is 55.
 
-An initial value of $to is set to be 0, and an initial value of $a0 is set to be 10.
 
-For every loop, $t0 is incremented by 1.
-
-When $t0's value equals to the value of $a0, the for loop breaks.
-
-### 3. Nested Procedure
-
-In outer_proc, space is allocated on the stack by decrementing the stack pointer $sp by 4 bytes using addi $sp, $sp, -4. 
-
-The return address ($ra) is then stored on the stack using sw $ra, 0($sp).
-
-The jal instruction is used again to call the inner_proc.
-
-Inside inner_proc, the system call to print an integer (syscall) is invoked. 
-
-In this case, the integer value 123 is loaded into register $a0, and the system call code 1 (which represents printing an integer) is loaded into register $v0.
-
-After printing the integer, the jr $ra instruction is used to return from the inner_proc procedure, jumping back to the return address stored in $ra.
-
-Back in outer_proc, the return address is retrieved from the stack using lw $ra, 0($sp), and the stack pointer is incremented to deallocate the space used for the return address.
-
-Finally, jr $ra is used to return from outer_proc, jumping back to the return address stored in $ra when main called outer_proc. 
-
-This effectively returns control back to main, which then ends the instruction by loading 10 into $v0.
 
 Thank you,
 
