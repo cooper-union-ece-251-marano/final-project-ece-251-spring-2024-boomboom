@@ -3,7 +3,7 @@
 .text
 .globl main         
 main:
-    addi $a0, $zero, 10
+    addi $a0, $zero, 10 # to print out nth term of the fibonacci sequence
     jal fib
     add $a0, $v0, $zero 
     jal print_int 
